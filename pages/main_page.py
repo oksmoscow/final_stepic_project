@@ -8,6 +8,8 @@ class MainPage(BasePage):                   # сделать наследник�
         login_link = self.browser.find_element(*MainPageLocators.LOGIN_LINK)
         login_link.click()
         # return LoginPage(browser=self.browser, url=self.browser.current_url)    # создается новый объект - страница входа и регистрации
+        alert = self.browser.switch_to.alert
+        alert.accept()
 
 
     def should_be_login_link(self):         # метод, который будет проверять наличие ссылки
