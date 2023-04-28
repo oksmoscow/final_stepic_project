@@ -22,4 +22,6 @@ class ProductPageLocators():
     PRODUCT_IN_BASKET_NAME = (By.CSS_SELECTOR, '#messages > div:nth-child(1) > div strong')
 
     PRODUCT_PRICE = (By.CSS_SELECTOR, ".price_color:nth-child(2)") 
-    PRODUCT_IN_BASKET_PRICE = (By.CSS_SELECTOR, '.alertinner > p strong')
+    PRODUCT_IN_BASKET_PRICE = (By.CSS_SELECTOR, ".alertinner > p strong")
+
+    SUCCESS_MESSAGE = (By.CSS_SELECTOR, ".alert-success:nth-child(1)")
