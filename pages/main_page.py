@@ -4,14 +4,11 @@ from .login_page import LoginPage           # импорт страницы с �
 from selenium.webdriver.common.by import By
 
 class MainPage(BasePage):                   # сделать наследником класса BasePage. Класс MainPage будет иметь доступ ко всем атрибутам и методам своего класса-предка
-    def go_to_login_page(self):
-        login_link = self.browser.find_element(*MainPageLocators.LOGIN_LINK)
-        login_link.click()
-        # return LoginPage(browser=self.browser, url=self.browser.current_url)    # создается новый объект - страница входа и регистрации
-        alert = self.browser.switch_to.alert
-        alert.accept()
+    # Так как методы из класса MainPage были перенесены в класс BasePage, то добавили заглушку: 
+    def __init__(self, *args, **kwargs):                    # метод __init__ вызывается при создании объекта
+        super(MainPage, self).__init__(*args, **kwargs)     # конструктор с ключевым словом super вызывает конструктор класса предка и передает ему все те аргументы, которые мы передали в конструктор MainPage
 
 
-    def should_be_login_link(self):         # метод, который будет проверять наличие ссылки
-        assert self.is_element_present(*MainPageLocators.LOGIN_LINK), "Login link is not presented"
-    
+ 
+
+

@@ -1,9 +1,14 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import TimeoutException
+
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from .locators import BasePageLocators
+
 import math
+
 
 class BasePage():
     def __init__(self, browser, url, timeout=5):
@@ -11,8 +16,14 @@ class BasePage():
         self.url = url
         # self.browser.implicitly_wait(timeout)   # команда для неявного ожидания со значением по умолчанию в 10
 
-    def open(self):
-        self.browser.get(self.url)
+
+    def go_to_login_page(self):
+        link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
+        link.click()
+        # return LoginPage(browser=self.browser, url=self.browser.current_url)    # создается новый объект - страница входа и регистрации
+        # alert = self.browser.switch_to.alert
+        #alert.accept()
+
 
     def is_element_present(self, how, what):    # метод, в котором перехватываем исключение. Передаются два аргумента: как искать (how - css, id, xpath и тд (By.CSS_SELECTOR)) и что искать (what - строку-селектор ("#login_link"))
         try:
@@ -33,6 +44,7 @@ class BasePage():
 
         return False
 
+
     def is_disappeared(self, how, what, timeout=4):             # метод, который проверяет, что элемент исчезает со временем
         try:
             WebDriverWait(self.browser, timeout, 1, TimeoutException).\
@@ -41,6 +53,15 @@ class BasePage():
             return False
 
         return True    
+
+
+    def open(self):
+        self.browser.get(self.url)
+
+
+    def should_be_login_link(self):         # метод, который будет проверять наличие ссылки
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
 
     def solve_quiz_and_get_code(self):          # метод для получения проверочного кода при добавлении товара в корзину
         alert = self.browser.switch_to.alert
@@ -55,4 +76,5 @@ class BasePage():
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
+
 
