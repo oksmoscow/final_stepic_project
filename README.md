@@ -11,3 +11,11 @@
 
 #### test_main_page.py 
 Тут храним сами тесты, которые запускаем с помощью PyTest по префиксу "test_".
+
+
+## премер команды для запуска тестов
+
+```java 
+pytest -s -m "users_actions" test_product_page.py
+```
+```-m "users_actions"``` - запуск тестов с маркером users_actions

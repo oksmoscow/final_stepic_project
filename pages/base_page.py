@@ -63,11 +63,16 @@ class BasePage():
         self.browser.get(self.url)
 
 
-    def should_be_login_link(self):         # метод, который будет проверять наличие ссылки
+    def should_be_authorized_user(self):                        # метод, который проверяет, что пользователь залогинен
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"
+
+
+    def should_be_login_link(self):                             # метод, который будет проверять наличие ссылки
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
 
 
-    def solve_quiz_and_get_code(self):          # метод для получения проверочного кода при добавлении товара в корзину
+    def solve_quiz_and_get_code(self):                          # метод для получения проверочного кода при добавлении товара в корзину
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]
         answer = str(math.log(abs((12 * math.sin(float(x))))))
