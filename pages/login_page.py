@@ -13,6 +13,7 @@ class LoginPage(BasePage):
         login_link = self.browser.find_element(*MainPageLocators.LOGIN_LINK)
         login_link.click()
         assert 'login' in self.browser.current_url, "login is not presented in url"     # проверка, что подстрока "login" есть в текущем url браузера
+        # solve_quiz_and_get_code(self)
 
 
     def should_be_login_form(self):

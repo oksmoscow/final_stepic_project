@@ -24,6 +24,10 @@ class BasePage():
         # alert = self.browser.switch_to.alert
         #alert.accept()
 
+    def go_to_busket_page(self):
+        link = self.browser.find_element(*BasePageLocators.BASKET_BUTTON)
+        link.click()
+
 
     def is_element_present(self, how, what):    # метод, в котором перехватываем исключение. Передаются два аргумента: как искать (how - css, id, xpath и тд (By.CSS_SELECTOR)) и что искать (what - строку-селектор ("#login_link"))
         try:
